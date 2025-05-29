@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     BOT_TOKEN: SecretStr
     ADMINS: str  
     GROUP_ID: str
+    CHANNEL: str
     
     @property
     def admin_list(self) -> list[int]:
