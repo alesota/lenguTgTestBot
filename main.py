@@ -4,9 +4,9 @@ from utils.naming import *
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from middlewares.subscription import CheckSubscription
 from config.config_reader import config
 from handlers import admin, anonym, schedule, start, week, canteen, hideKeyboard
-
 
 logging.basicConfig(
     level=logging.INFO,
@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 bot = Bot(token=config.BOT_TOKEN.get_secret_value())
 dp = Dispatcher()
+dp.message.middleware(CheckSubscription())
 dp.include_routers(
         anonym.router,
         start.router,
